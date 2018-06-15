@@ -1,14 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Link, NavLink} from 'react-router-dom';
+import Modal from 'react-modal';
 
 class Header extends React.Component {
   state = {
     hambergerToggle: ""
   };
 
-  handleLogin = () => {
-  console.log(`Login Button Pushed.`);
-  }
+  // handleLogin = () => {
+  // console.log(`Login Button Pushed.`);
+  // }
 
   toggleBerger = (state) => {
     console.log(`Hamberger clicked.`);
@@ -20,18 +21,17 @@ class Header extends React.Component {
     }
 
   render() {
-
-    // const myClassName = ' is-active ';
-    let logginButton = 'Sign Up';
+    const logginButton = 'Sign Up';
 
     return (
       <div>
         <section className="section">
         <nav className="navbar is-black is-fixed-top">
           <div className="navbar-brand">
-            <a className="navbar-item" href="index.html">
+            <NavLink to="/">
+            <a className="navbar-item">
               <img src="acme.png" alt="A boilerplate App" width="112" height="28"/>
-            </a>
+            </a></NavLink>
             <div className="navbar-burger burger" onClick={this.toggleBerger} data-target="navbarExampleTransparentExample">
               <span></span>
               <span></span>
@@ -44,9 +44,11 @@ class Header extends React.Component {
               <div className="navbar-item">
                 <div className="field is-grouped">
                   <p className="control">
-                    <a className="button Normal is-outlined" onClick={this.handleLogin}>
+                    <NavLink to="signup">
+                    <a className="button Normal is-outlined">
                       <span>{logginButton}</span>
                     </a>
+                    </NavLink>
                   </p>
                 </div>
               </div>
