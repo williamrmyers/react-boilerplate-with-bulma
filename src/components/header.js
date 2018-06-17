@@ -28,10 +28,11 @@ class Header extends React.Component {
         <section className="section">
         <nav className="navbar is-black is-fixed-top">
           <div className="navbar-brand">
-            <NavLink to="/">
-            <a className="navbar-item">
-              <img src="acme.png" alt="A boilerplate App" width="112" height="28"/>
-            </a></NavLink>
+            <div className="navbar-item">
+              <NavLink to="/">
+                <img src="acme.png" alt="A boilerplate App" width="112" height="28"/>
+              </NavLink>
+            </div>
             <div className="navbar-burger burger" onClick={this.toggleBerger} data-target="navbarExampleTransparentExample">
               <span></span>
               <span></span>
@@ -45,9 +46,9 @@ class Header extends React.Component {
                 <div className="field is-grouped">
                   <p className="control">
                     <NavLink to="signup">
-                    <a className="button Normal is-outlined">
+                    <button className="button Normal is-outlined">
                       <span>{logginButton}</span>
-                    </a>
+                    </button>
                     </NavLink>
                   </p>
                 </div>
@@ -60,4 +61,5 @@ class Header extends React.Component {
     );
   }
 }
+
 export default Header;
