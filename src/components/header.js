@@ -7,18 +7,9 @@ class Header extends React.Component {
     hambergerToggle: ""
   };
 
-  // handleLogin = () => {
-  // console.log(`Login Button Pushed.`);
-  // }
-
   toggleBerger = (state) => {
-    console.log(`Hamberger clicked.`);
-        if (this.state.hambergerToggle){
-              this.setState(() => ({hambergerToggle: ""}))
-            } else {
-              this.setState(() => ({hambergerToggle: 'is-active' }))
-        }
-    }
+        this.setState(() => ({ hambergerToggle: this.state.hambergerToggle ? "" : 'is-active' }))
+}
 
   render() {
     const logginButton = 'Sign Up';
