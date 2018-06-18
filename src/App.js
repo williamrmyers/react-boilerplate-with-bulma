@@ -10,19 +10,23 @@ import NotFound from './components/notFound';
 
 // Currently App.js will contain the router.
 
-const AppRouter = () => (
-  <BrowserRouter>
-    <div>
-      <Header />
-      <Switch>
-          <Route path="/" component={Home} exact/>
-          <Route path="/me" component={Me} exact/>
-          <Route path="/signup" component={Signup} exact/>
-          <Route component={NotFound}/>
-      </Switch>
-    </div>
-  </BrowserRouter>
-);
+class AppRouter extends Component {
 
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Header />
+          <Switch>
+              <Route path="/" component={Home} exact/>
+              <Route path="/me" component={Me} exact/>
+              <Route path="/signup" component={Signup} sendDataToApp={this.handelSignUp_2} exact/>
+              <Route component={NotFound}/>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    )
+  }
+}
 
 export default AppRouter;
