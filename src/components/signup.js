@@ -36,14 +36,58 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        {this.state.error && <p>{this.state.error}</p>}
-        <form onSubmit={this.handelSignup}>
-          First Name <input type="text" name="firstName" /><br/>
-          Last Name <input type="text" name="lastName" /><br/>
-          Email <input type="text" name="email" /><br/>
-          Password <input type="text" name="password" /><br/>
-          <button>Submit</button>
-        </form>
+        <section className="section">
+          <div className="container has-text-centered">
+            <div className="box formBox">
+
+            <h1 className="big-header">Sign Up!</h1>
+
+            <form onSubmit={this.handelSignup}>
+            <div className="field">
+              <label className="label">First Name</label>
+              <div className="control">
+                <input className="input" type="text" placeholder="First Name" name="firstName"/>
+              </div>
+            </div>
+
+            <div className="field">
+              <label className="label">Last Name</label>
+              <div className="controlclassName">
+                <input className="input" type="text" placeholder="Last Name" name="lastName"/>
+              </div>
+            </div>
+
+            <div className="field">
+              <label className="label">Email</label>
+              <div className="control has-icons-left has-icons-right">
+                <input className="input" type="email" placeholder="Email" name="email"/>
+                <span className="icon is-small is-left">
+                  <i className="fas fa-envelope"></i>
+                </span>
+                {this.passwordError}
+              </div>
+              <p className="help">{this.error}</p>
+            </div>
+
+            <div className="field">
+              <label className="label">Password</label>
+              <p className="control has-icons-left">
+                <input className="input" type="password" placeholder="Password" autoComplete="true" name="password"/>
+                <span className="icon is-small is-left">
+                  <i className="fas fa-lock"></i>
+                </span>
+              </p>
+            </div>
+
+            <div className="field is-grouped">
+              <div className="control">
+                <button className="button is-link">Submit</button>
+              </div>
+            </div>
+            </form>
+          </div>
+          </div>
+        </section>
       </div>
     );
   }
