@@ -9,7 +9,7 @@ class Header extends React.Component {
 
   toggleBerger = (state) => {
         this.setState(() => ({ hambergerToggle: this.state.hambergerToggle ? "" : 'is-active' }))
-}
+  }
 
   render() {
     const logginButton = 'Sign Up';
@@ -35,10 +35,25 @@ class Header extends React.Component {
             <div className="navbar-end">
               <div className="navbar-item">
                 <div className="field is-grouped">
+                  {this.props.isAuthenticated ? 'Is Authenticated' : "is not authenticated"}
+                    <p className="control">
+                    <NavLink to="login">
+                    <button className="button Normal is-outlined">
+                      <span>Login</span>
+                    </button>
+                    </NavLink>
+                  </p>
                   <p className="control">
                     <NavLink to="signup">
                     <button className="button Normal is-outlined">
-                      <span>{logginButton}</span>
+                      <span>Signup</span>
+                    </button>
+                    </NavLink>
+                  </p>
+                  <p className="control">
+                    <NavLink to="settings">
+                    <button className="button Normal is-outlined">
+                      <span>Settings</span>
                     </button>
                     </NavLink>
                   </p>

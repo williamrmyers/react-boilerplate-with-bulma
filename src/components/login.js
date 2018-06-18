@@ -1,9 +1,31 @@
 import React from 'react';
+import axios from 'axios';
 
 class Login extends React.Component {
   state = {
       error: undefined
   };
+  handelSignup = (e, props) => {
+    e.preventDefault();
+
+    const formElements = e.target.elements;
+    const email = formElements.email.value.trim();
+    const password = formElements.password.value.trim();
+    const error = false;
+
+    // // Submit to server
+    axios.post('https://mighty-falls-96437.herokuapp.com/users/login', {
+      "email": email,
+      "password": password
+    })
+      .then((response) => {
+        this.props.handelSubmit(response)
+      }).catch((e) => {
+        console.log(`Error Logging in` + e);
+        this.setState(() => ({ error }));
+      });
+
+  }
 
   render() {
     return (
@@ -52,18 +74,3 @@ class Login extends React.Component {
 }
 
 export default Login;
-
-
-
-
-
-// class Login extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <h1>Login</h1>
-//         <p>This is the Login page.</p>
-//       </div>
-//     );
-//   }
-// }

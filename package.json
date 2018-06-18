@@ -10,7 +10,8 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-modal": "^3.4.5",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "universal-cookie": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 class Signup extends React.Component {
   state = {
       error: undefined
   };
-  handelSignup = (e) => {
+  handelSignup = (e, props) => {
     e.preventDefault();
 
     const formElements = e.target.elements;
@@ -13,12 +14,11 @@ class Signup extends React.Component {
     const lastName = formElements.lastName.value.trim();
     const email = formElements.email.value.trim();
     const password = formElements.password.value.trim();
+    const error = false;
 
-    const error = '';
 
-    this.setState(() => ({ error }));
 
-    // Submit to server
+    // // Submit to server
     axios.post('https://mighty-falls-96437.herokuapp.com/users', {
       "email": email,
       "first_name": firstName,
@@ -26,10 +26,10 @@ class Signup extends React.Component {
       "password": password
     })
       .then((response) => {
-        console.log(response);
-        this.setState(() => ({ user: response.data.email }));
+        this.props.handelSubmit(response)
       }).catch((e) => {
         console.log(`Error Logging in` + e);
+        this.setState(() => ({ error }));
       });
 
   }
@@ -64,7 +64,7 @@ class Signup extends React.Component {
                 <span className="icon is-small is-left">
                   <i className="fas fa-envelope"></i>
                 </span>
-                {this.passwordError}
+                {this.state.error}
               </div>
               <p className="help">{this.error}</p>
             </div>
