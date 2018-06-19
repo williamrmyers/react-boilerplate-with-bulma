@@ -24,7 +24,6 @@ class Login extends React.Component {
         console.log(`Error Logging in` + e);
         this.setState(() => ({ error }));
       });
-
   }
 
   render() {

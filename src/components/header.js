@@ -57,6 +57,11 @@ class Header extends React.Component {
                     </button>
                     </NavLink>
                   </p>
+                  <p className="control">
+                    <button onClick={this.props.logOut} className="button Normal is-outlined">
+                      <span>Logout</span>
+                    </button>
+                  </p>
                 </div>
               </div>
             </div>

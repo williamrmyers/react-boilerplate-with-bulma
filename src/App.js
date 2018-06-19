@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link, NavLink, Redirect} from 'react-router-dom';
 import './App.css'
 import Cookies from 'universal-cookie';
-
+import axios from 'axios';
+// Routs
 import Home from './components/home';
 import Header from './components/header';
 import Me from './components/me';
@@ -15,24 +16,24 @@ import NotFound from './components/notFound';
 
 let isAuthenticated = false;
 
-
+// This function serves to tell the routes whether the user is autheticated ot not
+// And manages the cookies.
 const auth = {
   isAuthenticated: false,
   authenticate(token ,cb) {
     this.isAuthenticated = true;
     this.token = token;
+    // Sets cookie
     const cookies = new Cookies();
     cookies.set('auth', token, { path: '/' });
   },
-  signout(cb) {
+  loggout(cb) {
     this.isAuthenticated = false
     // Delete Cookie
-    // Make Request to Logout.
+    const cookies = new Cookies();
+    cookies.remove('auth', { path: '/' })
   }
 }
-// auth.authenticate('ugdushj',() => {
-//   console.log(`auth triggered.`, auth );
-// })
 
 // This is a custom route privitisation method.
 // https://tylermcginnis.com/react-router-protected-routes-authentication/
@@ -48,43 +49,55 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 )
 
 class AppRouter extends Component {
-  state = {
-    token: false,
-    authenticated: false
-  };
-  componentWillMount() {
-    // console.log({isAuthenticated});
-    // // Check if auth Cookie exists
-    // const cookies = new Cookies();
-    // const auth = cookies.get('auth');
-    // if (auth) {
-    //   this.setState(() => ({
-    //     authenticated: true,
-    //     token: auth
-    //   }))
-    // }
+  constructor() {
+    super();
   }
 
-  handelSubmit = (response) => {
-    // console.log('handelSubmission', response);
+  state = {
+    token: false,
+    authenticated: false,
+    user: {}
+  };
 
-    auth.authenticate(response.data.token,() => {
-      // console.log(`auth triggered.`, auth );
+  logOut = (token) => {
+    auth.loggout(() => {
+      console.log(`Logout`);
     });
-    console.log(response.data.token);
+
+    const authHeaders = { headers: {'x-auth': this.state.token } };
+    // Deletes token from database
+    axios.delete('https://mighty-falls-96437.herokuapp.com/users/me/token', authHeaders)
+      .then((response) => {
+        console.log(response.data);
+        // this.setMessage(response.data.text)
+        this.setState(() => ({
+          authenticated: false
+        }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  // Gets data from forms to
+  handelSubmit = (response) => {
+    auth.authenticate(response.data.token,() => {
+      console.log('Auth Triggered');
+      this.setCookie('yolo')
+    });
 
     this.setState(() => ({
       authenticated: true,
-      token: response.data.token
+      token: response.data.token,
+      user: { email: response.data.email }
     }));
-    console.log();
   }
 
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Header isAuthenticated={this.state.authenticated}/>
+          <Route render={(props) => <Header {...props} isAuthenticated={this.state.authenticated} logOut={this.logOut} />}/>
           <Switch>
               <Route path="/" component={Home} exact/>
               <Route path="/signup" exact render={(props) => <Signup {...props} handelSubmit={this.handelSubmit} />} />
@@ -98,34 +111,5 @@ class AppRouter extends Component {
     )
   }
 }
-
-
-// <Route exact path="/signup" render={(props) => <Signup {...props} handelSubmit={this.handelSubmit} />} render={() => ( this.state.authenticated ? ( <Redirect to="/me"/>) : ( <Signup /> ))}/>
-
-
-// <Route path="/signup" exact render={(props) => <Signup {...props} handelSubmit={this.handelSubmit} />} />
-// class App extends Component {
-//   state = {
-//     token: false,
-//     authenticated: false
-//   };
-//
-//   handelSubmission = (message) => {
-//     console.log('handelSubmission', message);
-//   }
-//
-//   render() {
-//     return (
-//       <div>
-//         <Header />
-//         <h1>This is the App Component.</h1>
-//         <Signup handelSubmission={this.handelSubmission}/>
-//         <Login handelSubmission={this.handelSubmission}/>
-//       </div>
-//     )
-//   }
-// }
-
-
 
 export default AppRouter;
