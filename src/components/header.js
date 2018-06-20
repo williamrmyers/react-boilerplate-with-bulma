@@ -34,38 +34,53 @@ class Header extends React.Component {
             <div className="navbar-start"></div>
             <div className="navbar-end">
               <div className="navbar-item">
-                <div className="field is-grouped">
-                  {this.props.isAuthenticated ? 'Is Authenticated' : "is not authenticated"}
-                    <p className="control">
-                    <NavLink to="login">
-                    <button className="button Normal is-outlined">
-                      <span>Login</span>
-                    </button>
-                    </NavLink>
-                  </p>
-                  <p className="control">
-                    <NavLink to="signup">
-                    <button className="button Normal is-outlined">
-                      <span>Signup</span>
-                    </button>
-                    </NavLink>
-                  </p>
-                  <p className="control">
-                    <NavLink to="settings">
-                    <button className="button Normal is-outlined">
-                      <span>Settings</span>
-                    </button>
-                    </NavLink>
-                  </p>
-                  <p className="control">
-                    <button onClick={this.props.logOut} className="button Normal is-outlined">
-                      <span>Logout</span>
-                    </button>
-                  </p>
+
+                  {this.props.isAuthenticated ?
+                    (
+                      <div className="field is-grouped">
+                      <p className="control">
+                        <button onClick={this.props.logOut} className="button Normal is-outlined">
+                          <span>Logout</span>
+                        </button>
+                      </p>
+                      <p className="control">
+                        <NavLink to="settings">
+                        <button className="button Normal is-outlined">
+                          <span>Settings</span>
+                        </button>
+                        </NavLink>
+                      </p>
+                      <p className="control">
+                        <NavLink to="private">
+                          <button className="button Normal is-outlined">
+                            <span>Private</span>
+                          </button>
+                        </NavLink>
+                      </p>
+                      </div>
+                    ) :
+                    (
+                      <div className="field is-grouped">
+                          <p className="control">
+                            <NavLink to="login">
+                            <button className="button Normal is-outlined">
+                              <span>Login</span>
+                            </button>
+                          </NavLink>
+                          </p>
+                          <p className="control">
+                          <NavLink to="signup">
+                          <button className="button Normal is-outlined">
+                            <span>Signup</span>
+                          </button>
+                          </NavLink>
+                        </p>
+                      </div>
+                    )
+                  }
                 </div>
               </div>
             </div>
-          </div>
         </nav>
       </section>
       </div>
