@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { BrowserRouter, Route, Switch, Link, NavLink, Redirect} from 'react-router-dom';
 
 class Login extends React.Component {
   state = {
@@ -19,10 +20,10 @@ class Login extends React.Component {
       "password": password
     })
       .then((response) => {
-        this.props.handelSubmit(response)
+        this.props.handelSubmit(response);
       }).catch((e) => {
         console.log(`Error Logging in` + e);
-        this.setState(() => ({ error }));
+        this.setState(() => ({ error: 'There was an error logging in please try again.' }));
       });
   }
 
@@ -43,9 +44,7 @@ class Login extends React.Component {
                 <span className="icon is-small is-left">
                   <i className="fas fa-envelope"></i>
                 </span>
-                {this.state.error}
               </div>
-              <p className="help">{this.error}</p>
             </div>
 
             <div className="field">
@@ -56,6 +55,7 @@ class Login extends React.Component {
                   <i className="fas fa-lock"></i>
                 </span>
               </p>
+              <p className="help">{this.state.error}</p>
             </div>
 
             <div className="field is-grouped">

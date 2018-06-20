@@ -29,7 +29,7 @@ class Signup extends React.Component {
         this.props.handelSubmit(response)
       }).catch((e) => {
         console.log(`Error Logging in` + e);
-        this.setState(() => ({ error }));
+        this.setState(() => ({ error: "Error Signing up, please try again." }));
       });
 
   }
@@ -64,9 +64,8 @@ class Signup extends React.Component {
                 <span className="icon is-small is-left">
                   <i className="fas fa-envelope"></i>
                 </span>
-                {this.state.error}
               </div>
-              <p className="help">{this.error}</p>
+              <p className="help">{this.state.error}</p>
             </div>
 
             <div className="field">
@@ -77,6 +76,7 @@ class Signup extends React.Component {
                   <i className="fas fa-lock"></i>
                 </span>
               </p>
+              <p className="help">{this.state.error}</p>
             </div>
 
             <div className="field is-grouped">

@@ -6,7 +6,7 @@ import axios from 'axios';
 // Routs
 import Home from './components/home';
 import Header from './components/header';
-import Me from './components/me';
+import Private from './components/private';
 import Signup from './components/signup';
 import Login from './components/login';
 import Settings from './components/settings';
@@ -102,7 +102,7 @@ class AppRouter extends Component {
               <Route path="/" component={Home} exact/>
               <Route path="/signup" exact render={(props) => <Signup {...props} handelSubmit={this.handelSubmit} />} />
               <Route path="/login" exact render={(props) => <Login {...props} handelSubmit={this.handelSubmit} />} />
-              <PrivateRoute path="/me" component={Me} exact/>
+              <PrivateRoute path="/Private" component={Private} exact/>
               <PrivateRoute path="/settings" component={Settings} exact/>
               <Route component={NotFound}/>
           </Switch>

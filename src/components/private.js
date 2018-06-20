@@ -2,7 +2,7 @@ import React from 'react';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 
-class Me extends React.Component {
+class Private extends React.Component {
   state = {
       error: undefined,
       text: undefined,
@@ -35,10 +35,20 @@ class Me extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.state.text}</p>
+      <section className="section">
+          <div className="hero">
+            <div className="hero-body">
+              <div className="container has-text-centered content">
+                <h3>Boom</h3>
+                <p>Your now logged in and requesting data from the server.</p>
+                <p>{this.state.text}</p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }
 }
 
-export default Me;
+export default Private;
