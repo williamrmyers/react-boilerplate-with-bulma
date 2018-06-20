@@ -100,8 +100,8 @@ class AppRouter extends Component {
           <Route render={(props) => <Header {...props} isAuthenticated={this.state.authenticated} logOut={this.logOut} />}/>
           <Switch>
               <Route path="/" component={Home} exact/>
-              <Route path="/signup" exact render={(props) => <Signup {...props} handelSubmit={this.handelSubmit} />} />
-              <Route path="/login" exact render={(props) => <Login {...props} handelSubmit={this.handelSubmit} />} />
+              <Route path="/signup" exact render={(props) => <Signup {...props} isAuthenticated={this.state.authenticated}  handelSubmit={this.handelSubmit} />} />
+              <Route path="/login" exact render={(props) => <Login {...props} isAuthenticated={this.state.authenticated} handelSubmit={this.handelSubmit} />} />
               <PrivateRoute path="/Private" component={Private} exact/>
               <PrivateRoute path="/settings" component={Settings} exact/>
               <Route component={NotFound}/>

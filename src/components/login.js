@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { BrowserRouter, Route, Switch, Link, NavLink, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 class Login extends React.Component {
   state = {
@@ -67,6 +67,7 @@ class Login extends React.Component {
           </div>
           </div>
         </section>
+        { this.props.isAuthenticated ? <Redirect to='/private' /> : null}
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import {Redirect} from 'react-router-dom';
 
 class Signup extends React.Component {
   state = {
@@ -88,6 +89,7 @@ class Signup extends React.Component {
           </div>
           </div>
         </section>
+        { this.props.isAuthenticated ? <Redirect to='/private' /> : null}
       </div>
     );
   }
