@@ -12,8 +12,6 @@ class Header extends React.Component {
   }
 
   render() {
-    const logginButton = 'Sign Up';
-
     return (
       <div>
         <section className="section">
