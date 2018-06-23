@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch, Link, NavLink, Redirect} from 'react-rout
 import './App.css'
 import Cookies from 'universal-cookie';
 import axios from 'axios';
-// Routs
+// Routes
 import Home from './components/home';
 import Header from './components/header';
 import Private from './components/private';
@@ -98,8 +98,8 @@ class AppRouter extends Component {
         <div>
           <Route render={(props) => <Header {...props} isAuthenticated={this.state.authenticated} logOut={this.logOut} />}/>
           <Switch>
-              <Route path="/" render={(props) => <Home {...props} isAuthenticated={this.state.authenticated} />} exact/>
-              <Route path="/signup" exact render={(props) => <Signup {...props} isAuthenticated={this.state.authenticated}  handelSubmit={this.handelSubmit} />} />
+              <Route path="/" render={(props) => <Home {...props} isAuthenticated={this.state.authenticated} token={this.state.token} />} exact/>
+              <Route path="/signup" exact render={(props) => <Signup {...props} isAuthenticated={this.state.authenticated} handelSubmit={this.handelSubmit} />} />
               <Route path="/login" exact render={(props) => <Login {...props} isAuthenticated={this.state.authenticated} handelSubmit={this.handelSubmit} />} />
               <PrivateRoute path="/settings" component={Settings} exact/>
               <Route component={NotFound}/>

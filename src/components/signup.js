@@ -89,7 +89,7 @@ class Signup extends React.Component {
           </div>
           </div>
         </section>
-        { this.props.isAuthenticated ? <Redirect to='/private' /> : null}
+        { this.props.isAuthenticated ? <Redirect to='/' /> : null}
       </div>
     );
   }

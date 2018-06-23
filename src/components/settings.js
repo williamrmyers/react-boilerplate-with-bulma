@@ -1,16 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import NameChangeModal from './namechangemodal'
+import NameChangeModal from './namechangemodal';
+import {Redirect} from 'react-router-dom';
 
 class Settings extends React.Component {
 
   state = {
-            firstName:null,
-            lastName:null,
-            email:null,
+            firstName: null,
+            lastName: null,
+            email: null,
             NameChangeModalclosed: true,
-            showDeleteConfirmation:false
+            showDeleteConfirmation: false,
+            redirect: false
           }
 
   setMessage = (message) => {
@@ -85,6 +87,24 @@ class Settings extends React.Component {
     this.getMeData();
   }
 
+  deleteAccount = (newName) => {
+    // get Headers from cookie
+    const cookies = new Cookies();
+    const token = cookies.get('auth');
+    const authHeaders = { headers: {'x-auth': token }};
+
+    // Make Request
+    axios.delete('https://radiant-tor-41424.herokuapp.com/users/me', authHeaders)
+      .then((response) => {
+        console.log('Deleted',response.data);
+        cookies.remove('auth', { path: '/' });
+        this.setState(() => ({ redirect: true }))
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
 
 render () {
   return (
@@ -95,14 +115,14 @@ render () {
                       <div className="container has-text-centered content">
                         <h3>Your Profile</h3>
                         <p>
-                        <strong>First Name:</strong> {this.state.firstName} <br/>
-                        <strong>Last Name:</strong> {this.state.lastName} <br/>
-                        <a onClick={this.toggleNameModal} className="button">Change</a> <br/>
-                        <strong>Email</strong>: {this.state.email} <br/>
-                        <a className="button">Change</a> <br/>
-                      </p>
+                          <strong>First Name:</strong> {this.state.firstName} <br/>
+                          <strong>Last Name:</strong> {this.state.lastName} <br/>
+                          <a onClick={this.toggleNameModal} className="button">Change</a> <br/>
+                          <strong>Email</strong>: {this.state.email} <br/>
+                          <a className="button">Change</a> <br/>
+                        </p>
                       <br/>
-                      <a className="button">Delete Account</a>
+                      <a onClick={this.deleteAccount} className="button">Delete Account</a>
                       </div>
                     </div>
                   </div>
@@ -115,6 +135,8 @@ render () {
                   firstName = {this.state.firstName}
                   lastName = {this.state.lastName}
                   />
+                
+                { this.state.redirect ? <meta http-equiv="refresh" content="0; URL='/'" /> : null}
           </div>
         )}
       };
