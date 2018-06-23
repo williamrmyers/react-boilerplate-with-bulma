@@ -83,7 +83,6 @@ class AppRouter extends Component {
   handelSubmit = (response) => {
     auth.authenticate(response.data.token,() => {
       console.log('Auth Triggered');
-      this.setCookie('yolo')
     });
 
     this.setState(() => ({
@@ -99,10 +98,9 @@ class AppRouter extends Component {
         <div>
           <Route render={(props) => <Header {...props} isAuthenticated={this.state.authenticated} logOut={this.logOut} />}/>
           <Switch>
-              <Route path="/" component={Home} exact/>
+              <Route path="/" render={(props) => <Home {...props} isAuthenticated={this.state.authenticated} />} exact/>
               <Route path="/signup" exact render={(props) => <Signup {...props} isAuthenticated={this.state.authenticated}  handelSubmit={this.handelSubmit} />} />
               <Route path="/login" exact render={(props) => <Login {...props} isAuthenticated={this.state.authenticated} handelSubmit={this.handelSubmit} />} />
-              <PrivateRoute path="/Private" component={Private} exact/>
               <PrivateRoute path="/settings" component={Settings} exact/>
               <Route component={NotFound}/>
           </Switch>

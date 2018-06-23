@@ -21,6 +21,7 @@ class Login extends React.Component {
     })
       .then((response) => {
         this.props.handelSubmit(response);
+        console.log(response);
       }).catch((e) => {
         console.log(`Error Logging in` + e);
         this.setState(() => ({ error: 'There was an error logging in please try again.' }));
@@ -67,7 +68,7 @@ class Login extends React.Component {
           </div>
           </div>
         </section>
-        { this.props.isAuthenticated ? <Redirect to='/private' /> : null}
+        { this.props.isAuthenticated ? <Redirect to='/' /> : null}
       </div>
     );
   }

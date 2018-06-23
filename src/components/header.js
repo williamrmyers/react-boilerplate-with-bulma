@@ -48,13 +48,6 @@ class Header extends React.Component {
                         </button>
                         </NavLink>
                       </p>
-                      <p className="control">
-                        <NavLink to="private">
-                          <button className="button Normal is-outlined">
-                            <span>Private</span>
-                          </button>
-                        </NavLink>
-                      </p>
                       </div>
                     ) :
                     (

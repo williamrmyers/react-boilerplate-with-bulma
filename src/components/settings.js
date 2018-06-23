@@ -9,7 +9,8 @@ class Settings extends React.Component {
             firstName:null,
             lastName:null,
             email:null,
-            NameChangeModalclosed: true
+            NameChangeModalclosed: true,
+            showDeleteConfirmation:false
           }
 
   setMessage = (message) => {

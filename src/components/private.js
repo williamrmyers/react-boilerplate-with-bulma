@@ -6,11 +6,15 @@ class Private extends React.Component {
   state = {
       error: undefined,
       text: undefined,
-      token:undefined
+      token:undefined,
+      kittens:undefined
   };
 
-  setMessage = (message) => {
-    this.setState(() => ({ text: message }));
+  setData = (data) => {
+    this.setState(() => ({
+      text: data.text,
+      kettens: data.image
+    }));
   }
 
   componentWillMount() {
@@ -25,7 +29,7 @@ class Private extends React.Component {
     axios.get('https://radiant-tor-41424.herokuapp.com/members', authHeaders)
       .then((response) => {
         console.log(response.data.text);
-        this.setMessage(response.data.text)
+        this.setData(response.data)
       })
       .catch((error) => {
         console.log(error);
