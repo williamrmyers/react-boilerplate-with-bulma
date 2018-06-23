@@ -66,7 +66,7 @@ class AppRouter extends Component {
 
     const authHeaders = { headers: {'x-auth': this.state.token } };
     // Deletes token from database
-    axios.delete('https://mighty-falls-96437.herokuapp.com/users/me/token', authHeaders)
+    axios.delete('https://radiant-tor-41424.herokuapp.com/users/me/token', authHeaders)
       .then((response) => {
         console.log(response.data);
         // this.setMessage(response.data.text)
