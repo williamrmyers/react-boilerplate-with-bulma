@@ -17,22 +17,30 @@ class Home extends React.Component {
     }));
   }
 
-  componentWillMount() {
+  getMembersData = () => {
     const cookies = new Cookies();
     const token = cookies.get('auth');
-    console.log(token);
+    if (token) {
+      const authHeaders = {
+        headers: {'x-auth': token }
+      };
 
-    const authHeaders = {
-      headers: {'x-auth': token }
-    };
-
-    axios.get('https://radiant-tor-41424.herokuapp.com/members', authHeaders)
-      .then((response) => {
-        this.setData(response.data)
-      })
-      .catch((error) => {
-        console.log(error);
+      axios.get('https://radiant-tor-41424.herokuapp.com/members', authHeaders)
+        .then((response) => {
+          this.setData(response.data)
+        })
+        .catch((error) => {
+          console.log(error);
       });
+    }
+  }
+
+  // componentDidUpdate(nextProps, nextState) {
+  //   this.getMembersData();
+  // }
+
+  componentWillMount() {
+    this.getMembersData();
   }
 
   render() {
